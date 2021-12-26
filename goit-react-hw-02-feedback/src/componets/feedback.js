@@ -3,23 +3,18 @@ import Controls from './controls';
 import List from './feedbackList';
 
 class Feedback extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
+  state = { good: 0, neutral: 0, bad: 0 };
 
-  handleGoodClick = () => {
-    this.setState(prevState => ({ good: prevState.good + 1 }));
-  };
+  // handleGoodClick = () => {
+  //   this.setState(prevState => ({ good: prevState.good + 1 }));
+  // };
+  optionsArr() {
+    const options = Object.keys(this.state);
+    return options;
+  }
 
-  handleNeutralClick = () => {
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-  };
-  handleBadClick = () => {
-    this.setState(prevState => {
-      return { bad: prevState.bad + 1 };
-    });
+  onLeaveFeedback = option => {
+    this.setState(prevState => ({ [option]: prevState[option] + 1 }));
   };
 
   totalVoutes = () => {
@@ -34,12 +29,13 @@ class Feedback extends React.Component {
   render() {
     return (
       <div>
-        <Controls
-          handleGoodClick={this.handleGoodClick}
-          handleNeutralClick={this.handleNeutralClick}
-          handleBadClick={this.handleBadClick}
-        />
+        <h2>Please leave feedback</h2>
 
+        <Controls
+          options={this.optionsArr()}
+          onLeaveFeedback={this.onLeaveFeedback}
+        />
+        <h3>Statistics</h3>
         {this.totalVoutes() !== 0 ? (
           <List
             good={this.state.good}

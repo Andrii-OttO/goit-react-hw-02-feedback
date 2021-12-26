@@ -1,6 +1,6 @@
 import './App.css';
 import './componets/syle.module.css';
-import Feedback from './componets/feedback';
+import Feedback from './componets/feedback.js';
 
 function App() {
   return (
